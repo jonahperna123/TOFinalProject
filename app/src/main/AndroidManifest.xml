@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MessageActivity"></activity>
-        <activity android:name=".ReviewMovieActivity" />
+        <activity android:name=".AddReviewActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".homePageActivity" />
         <activity android:name=".MovieActivity" />
