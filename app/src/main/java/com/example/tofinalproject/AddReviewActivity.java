@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.view.Menu;
@@ -24,6 +27,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
     TextView textViewHeader, textViewTitle;
     ImageView imageViewMoviePoster;
     RatingBar ratingBar;
+    EditText editTextReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +50,34 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
         // user can set rating
         ratingBar = findViewById(R.id.ratingBar);
         ratingBar.setOnRatingBarChangeListener(this);
+
+        // user can add text review
+        editTextReview = findViewById(R.id.editTextReview_AddReviewActivity);
+        // validate that user's review is at most 5 words
+        editTextReview.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // grab string from EditText and split into separate words
+                String[] reviewWords = editTextReview.getText().toString().split(" ");
+                if (reviewWords.length > 5) {
+                    editTextReview.setError("Max of 5 words");
+                }
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.navmenu, menu);
 
@@ -59,7 +86,6 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         if(item.getItemId() == R.id.itemLogin) {
             Intent loginIntent = new Intent(this, loginActivity.class);
             startActivity(loginIntent);
