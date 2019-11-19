@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemLogin"
+        android:title="Login" />
+    <item
+        android:id="@+id/itemHome"
+        android:title="Home" />
+    <item
+        android:id="@+id/itemMessage"
+        android:title="Message" />
+    <item
+        android:id="@+id/itemMovie"
+        android:title="Movie" />
+    <item
+        android:id="@+id/itemReview"
+        android:title="Review" />
+    <item
+        android:id="@+id/itemSocial"
+        android:title="Social" />
+    <item
+        android:id="@+id/itemProfile"
+        android:title="Profile" />
+</menu>
