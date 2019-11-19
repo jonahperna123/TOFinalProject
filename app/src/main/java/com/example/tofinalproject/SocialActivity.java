@@ -112,7 +112,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onResponse(String response) {
 
-                textViewResponse.setText("Response is: "+ response.substring(0,500));
+//                textViewResponse.setText("Response is: "+ response.substring(0,500));
 
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
@@ -123,10 +123,10 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
                     Object movieObject = jsonResponse.get("results");
 
 
-                    Toast.makeText(SocialActivity.this, "Response: " + movieObject, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SocialActivity.this, "Response: " + jsonArray, Toast.LENGTH_SHORT).show();
 
 
-//                    textViewResponse.setText(movieObject);
+//                    textViewResponse.setText();
 
 
                 } catch (JSONException e) {
