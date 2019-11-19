@@ -46,7 +46,7 @@ public class MovieActivity extends AppCompatActivity {
             startActivity(movieIntent);
 
         } else if (item.getItemId() == R.id.itemReview) {
-            Intent reviewIntent = new Intent(this, ReviewMovieActivity.class);
+            Intent reviewIntent = new Intent(this, AddReviewActivity.class);
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
