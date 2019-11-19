@@ -45,7 +45,7 @@
         android:layout_width="246dp"
         android:layout_height="49dp"
         android:layout_marginTop="15dp"
-        android:isIndicator="true"
+        android:isIndicator="false"
         android:stepSize="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

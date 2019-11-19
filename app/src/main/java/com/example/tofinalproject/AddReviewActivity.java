@@ -5,14 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class AddReviewActivity extends AppCompatActivity {
+public class AddReviewActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener {
 
     // TODO: take out, replace with info taken from MovieActivity
     String movieTitle = "The Joker";
@@ -36,12 +40,12 @@ public class AddReviewActivity extends AppCompatActivity {
 
         // display the current movie's poster
         imageViewMoviePoster = findViewById(R.id.imageViewMoviePoster_AddReviewActivity);
+        // TODO: grab image from API
         // imageViewMoviePoster.setImageDrawable(Drawable(file_path etc));
 
-        // display the current movie's rating
-        // TODO: find out if rating should be for user to change, or just an indicator
+        // user can set rating
         ratingBar = findViewById(R.id.ratingBar);
-        // ratingBar.setRating(rating);
+        ratingBar.setOnRatingBarChangeListener(this);
     }
 
     @Override
@@ -87,5 +91,11 @@ public class AddReviewActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+        // update rating bar based on user input
+        ratingBar.setRating(rating);
     }
 }
