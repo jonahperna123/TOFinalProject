@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TOFinalProject</string>
     <string name="header_AddReviewActivity">Add Review for %1$s</string>
+    <string name="title_AddReviewActivity">%1$s</string>
 </resources>

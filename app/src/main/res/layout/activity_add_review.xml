@@ -10,7 +10,7 @@
         android:id="@+id/textViewHeader_AddReviewActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="25dp"
         android:text="@string/header_AddReviewActivity"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,11 +22,46 @@
         android:id="@+id/textViewTitle_AddReviewActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Placeholder"
+        android:layout_marginTop="25dp"
+        android:text="@string/title_AddReviewActivity"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewHeader_AddReviewActivity" />
+
+    <ImageView
+        android:id="@+id/imageViewMoviePoster_AddReviewActivity"
+        android:layout_width="136dp"
+        android:layout_height="168dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle_AddReviewActivity"
+        app:srcCompat="?android:attr/colorPrimary" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="246dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="40dp"
+        android:isIndicator="false"
+        android:stepSize="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewMoviePoster_AddReviewActivity" />
+
+    <EditText
+        android:id="@+id/editTextReview_AddReviewActivity"
+        android:layout_width="286dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Describe in 5 words..."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

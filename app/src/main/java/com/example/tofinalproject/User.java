@@ -6,12 +6,14 @@ import java.util.ArrayList;
 
 public class User {
 
+    public String firstName;
+    public String lastName;
     public String username;
     public String email;
     public String id;
     public String password;
     public ArrayList<String> followers;
-    public ArrayAdapter<String> following;
+    public ArrayList<String> following;
     public int numFollowing;
     public int numFollowers;
     public String phoneNumber;
@@ -20,7 +22,9 @@ public class User {
 
     }
 
-    public User(String username, String email, String id, String password, ArrayList<String> followers, ArrayAdapter<String> following, int numFollowing, int numFollowers, String phoneNumber) {
+    public User(String firstName, String lastName, String username, String email, String id, String password, ArrayList<String> followers, ArrayList<String> following, int numFollowing, int numFollowers, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.id = id;
