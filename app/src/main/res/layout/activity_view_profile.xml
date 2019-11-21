@@ -33,27 +33,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="88dp"
+        android:layout_marginEnd="43dp"
         android:text="Following"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textViewFollowers"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="90dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
 
     <TextView
         android:id="@+id/textViewFollowersView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="206dp"
+        android:layout_marginStart="228dp"
         android:layout_marginTop="20dp"
-        android:text="followers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
 
@@ -61,9 +52,40 @@
         android:id="@+id/textViewFollowingView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="23dp"
-        android:text="Following"
-        app:layout_constraintStart_toEndOf="@+id/textViewFollowersView"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFollowing" />
+
+    <Button
+        android:id="@+id/buttonViewMovies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="147dp"
+        android:text="Movies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfileHeader" />
+
+    <Button
+        android:id="@+id/buttonViewTVShows"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="101dp"
+        android:text="TV Shows"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
+
+    <TextView
+        android:id="@+id/textViewContainerHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="18dp"
+        android:text="Your Top 10"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonViewMovies" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
