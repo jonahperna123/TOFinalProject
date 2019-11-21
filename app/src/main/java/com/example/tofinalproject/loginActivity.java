@@ -51,28 +51,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         String email = editTextUsername.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        if(view == buttonRegister)
-            makeUsers(email, password);
         if (view == buttonLogin)
             loginUsers (email, password);
 
-    }
-    private void makeUsers(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener< AuthResult >() {
-                    @Override
-                    public void onComplete(@NonNull Task< AuthResult > task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(loginActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(loginActivity.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
-                        }
+        if (view == buttonRegister) {
+            Intent mainIntent = new Intent(loginActivity.this,RegisterActivity.class);
+            startActivity(mainIntent);
+        }
 
-                        // ...
-                    }
-                });
 
     }
 
