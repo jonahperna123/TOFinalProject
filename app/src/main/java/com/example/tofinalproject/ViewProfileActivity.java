@@ -10,15 +10,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button testButton;
+    TextView textViewFollowers, textViewFollowing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +31,43 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_view_profile);
 
 
-
         testButton = findViewById(R.id.button);
+        textViewFollowers = findViewById(R.id.textViewFollowersView);
+        textViewFollowing = findViewById(R.id.textViewFollowingView);
 
         testButton.setOnClickListener(this);
 
+        setFollowingAndFollowers();
+
+
+    }
+
+    public void setFollowingAndFollowers(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user");
 
 
 
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                User value = dataSnapshot.getValue(User.class);
+
+                textViewFollowers.setText(String.valueOf(value.numFollowers));
+                textViewFollowing.setText(String.valueOf(value.numFollowing));
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+
+            }
+        });
     }
 
 
