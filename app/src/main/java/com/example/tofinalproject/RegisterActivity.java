@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textViewCreate;
-    EditText editTextNewName, editTextNewEmail, editTextConfirmEmail, editTextNewPassword, editTextConfirmPassword;
+    EditText editTextNewFirstName, editTextNewEmail, editTextConfirmEmail, editTextNewPassword, editTextConfirmPassword, editTextNewLastName;
     Button buttonCreateAccount;
     private FirebaseAuth mAuth;
 
@@ -29,11 +29,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         textViewCreate = findViewById(R.id.textViewCreate);
         editTextNewEmail = findViewById(R.id.editTextNewEmail);
-        editTextNewName = findViewById(R.id.editTextNewName);
         editTextConfirmEmail = findViewById(R.id.editTextConfirmEmail);
         editTextNewPassword = findViewById(R.id.editTextNewPassword);
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
         buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
+        editTextNewFirstName = findViewById(R.id.editTextNewFirstName);
+        editTextNewLastName = findViewById(R.id.editTextNewLastName);
 
         buttonCreateAccount.setOnClickListener(this);
 
@@ -46,15 +47,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         String email = editTextNewEmail.getText().toString();
         String password = editTextNewPassword.getText().toString();
-        String name = editTextNewName.getText().toString();
+        String firstName = editTextNewFirstName.getText().toString();
+        String lastName = editTextNewLastName.getText().toString();
 
 
         if(view == buttonCreateAccount)
-            makeUsers(name, email, password);
+            makeUsers(firstName, lastName, email, password);
 
     }
 
-    private void makeUsers(String name, String email, String password) {
+    private void makeUsers(String firstName, String lastName, String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener< AuthResult >() {
                     @Override

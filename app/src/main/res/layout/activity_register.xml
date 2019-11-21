@@ -8,32 +8,35 @@
 
     <TextView
         android:id="@+id/textViewCreate"
-        android:layout_width="251dp"
-        android:layout_height="112dp"
+        android:layout_width="250dp"
+        android:layout_height="65dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="100dp"
         android:text="Create A New Binge Buddy Account!"
         android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNewName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNewLastName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNewName"
+        android:id="@+id/editTextNewLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="99dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="28dp"
         android:ems="10"
-        android:hint="Name     "
+        android:hint="Last Name     "
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/editTextNewEmail"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCreate" />
 
@@ -80,7 +83,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextConfirmEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNewName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNewLastName" />
 
     <EditText
         android:id="@+id/editTextConfirmPassword"
@@ -109,5 +112,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
+
+    <EditText
+        android:id="@+id/editTextNewFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="21dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextNewLastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCreate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
