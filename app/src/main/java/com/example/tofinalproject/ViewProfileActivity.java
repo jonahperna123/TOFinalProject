@@ -31,24 +31,24 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-
-       // testButton = findViewById(R.id.button);
+        testButton = findViewById(R.id.buttonTest);
         buttonViewTvShows = findViewById(R.id.buttonViewTVShows);
         buttonViewMovies = findViewById(R.id.buttonViewMovies);
 
         textViewFollowers = findViewById(R.id.textViewFollowersView);
         textViewFollowing = findViewById(R.id.textViewFollowingView);
 
-        //testButton.setOnClickListener(this);
+        testButton.setOnClickListener(this);
         buttonViewMovies.setOnClickListener(this);
         buttonViewTvShows.setOnClickListener(this);
 
-        setFollowingAndFollowers();
+        getUserInformation();
+        setMovieList();
 
 
     }
 
-    public void setFollowingAndFollowers(){
+    public void getUserInformation(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("user");
 
@@ -83,14 +83,34 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    public void setMovieList() {
+
+           for (int i = 0; i < 10; ++i) {
+               String textInp = Integer.toString(i) + ". ";
+
+                if (i < moviesRated.size()){
+                    //put the movie
+                    textInp += moviesRated.get(i);
+                }
+
+
+           } //for each index
+
+
+    }
+
+    public void setTvShowList() {
+
+    }
+
 
     @Override
     public void onClick(View view) {
 
         if (view == buttonViewMovies) {
-
+            setMovieList();
         } else if (view == buttonViewTvShows) {
-
+            setTvShowList();
         }
 
 
@@ -100,38 +120,41 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
 
 
+        if (view == testButton) {
+
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = database.getReference("user");
 
 
+            String firstName = "Test";
+            String lastName = "User";
+            String userName = "testUser1";
+            String email = "testuser@hotmail.com";
+            String id = "0000000";
+            String password = "password";
+            ArrayList<String> followers = new ArrayList<String>();
+            followers.add("testfollower1");
+            ArrayList<String> following = new ArrayList<String>();
+            following.add("testfollowing1");
+            int numFollowing = 1;
+            int numFollowers = 1;
+            String phoneNumber = "856-701-4203";
+            ArrayList<String> moviesRated = new ArrayList<String>();
+            ArrayList<String> tvShowsRated = new ArrayList<String>();
+            moviesRated.add("The Shawshank Redemption");
+            moviesRated.add("Mission Impossible");
+            moviesRated.add("Shrek");
+            moviesRated.add("Paranormal Activity");
+
+            tvShowsRated.add("Psych");
+            tvShowsRated.add("American Horror Story");
+
+            User userOne = new User(firstName, lastName, userName, email, id, password, followers, following, numFollowing, numFollowers, phoneNumber, moviesRated, tvShowsRated);
 
 
+            myRef.setValue(userOne);
 
-
-//        if (view == testButton) {
-//
-//            FirebaseDatabase database = FirebaseDatabase.getInstance();
-//            DatabaseReference myRef = database.getReference("user");
-//
-//
-//            String firstName = "Test";
-//            String lastName = "User";
-//            String userName = "testUser1";
-//            String email = "testuser@hotmail.com";
-//            String id = "0000000";
-//            String password = "password";
-//            ArrayList<String> followers = new ArrayList<String>();
-//            followers.add("testfollower1");
-//            ArrayList<String> following = new ArrayList<String>();
-//            following.add("testfollowing1");
-//            int numFollowing = 1;
-//            int numFollowers = 1;
-//            String phoneNumber = "856-701-4203";
-//
-//            User userOne = new User(firstName, lastName, userName, email, id, password, followers, followers, numFollowing, numFollowers, phoneNumber);
-//
-//
-//            myRef.setValue(userOne);
-//
-//        }
+        }
     }
 
 
