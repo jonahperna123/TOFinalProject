@@ -65,8 +65,12 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
                 textViewFollowers.setText(String.valueOf(value.numFollowers));
                 textViewFollowing.setText(String.valueOf(value.numFollowing));
 
-                moviesRated = value.moviesRated;
-                tvShowsRated = value.tvShowsRated;
+
+                //DO THIS - grab values from realtime database
+                tvShowsRated =  new ArrayList<String>();
+                moviesRated=  new ArrayList<String>();
+
+
 
 
             }
