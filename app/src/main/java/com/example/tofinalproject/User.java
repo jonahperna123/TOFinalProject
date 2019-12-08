@@ -11,7 +11,7 @@ public class User {
     public String username;
     public String email;
     public String id;
-    public String password;
+    public String password; // TODO: delete this, unsafe
     public ArrayList<String> followers;
     public ArrayList<String> following;
     public int numFollowing;

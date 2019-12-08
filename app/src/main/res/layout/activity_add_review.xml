@@ -22,9 +22,9 @@
         android:id="@+id/textViewTitle_AddReviewActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:text="@string/title_AddReviewActivity"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:id="@+id/imageViewMoviePoster_AddReviewActivity"
         android:layout_width="136dp"
         android:layout_height="168dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle_AddReviewActivity"
@@ -44,7 +44,7 @@
         android:id="@+id/ratingBar"
         android:layout_width="246dp"
         android:layout_height="49dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
         android:isIndicator="false"
         android:stepSize="0.5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,5 +63,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+    <Button
+        android:id="@+id/buttonSubmit_AddReviewActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextReview_AddReviewActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
