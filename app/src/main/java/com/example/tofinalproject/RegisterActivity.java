@@ -67,35 +67,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 }
 
-    private void makeUsers(String firstName, String lastName, String email, String password) {
+    private void makeUsers(final String firstName, final String lastName, final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener< AuthResult >() {
                 @Override
                 public void onComplete(@NonNull Task< AuthResult > task) {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                        Intent mainIntent = new Intent(RegisterActivity.this, loginActivity.class);
-                        startActivity(mainIntent);
+                if (task.isSuccessful()) {
+                    User newUser = new User(email, firstName, lastName);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference myRef = database.getReference("user");
+                    myRef.push().setValue(newUser);
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(RegisterActivity.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent mainIntent = new Intent(RegisterActivity.this, homePageActivity.class);
+                    startActivity(mainIntent);
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(RegisterActivity.this, "Account creation failed.", Toast.LENGTH_SHORT).show();
+                }
                 }
             });
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String createUserEmail = editTextNewEmail.getText().toString();
-            String createFirstName = editTextNewFirstName.getText().toString();
-            String createLastName = editTextNewLastName.getText().toString();
-
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference myRef = database.getReference("user");
-
-            User newUser = new User(createUserEmail, createFirstName, createLastName);
-            myRef.push().setValue(newUser);
-            Toast.makeText(this, "Added user to database", Toast.LENGTH_SHORT).show();
-        }
     }
 }
