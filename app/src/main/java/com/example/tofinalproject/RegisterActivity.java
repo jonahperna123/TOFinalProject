@@ -50,18 +50,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         String confirmedPassword = editTextConfirmPassword.getText().toString();
         String email = editTextNewEmail.getText().toString();
+        String confirmedEmail = editTextConfirmEmail.getText().toString();
         String password = editTextNewPassword.getText().toString();
         String firstName = editTextNewFirstName.getText().toString();
         String lastName = editTextNewLastName.getText().toString();
 
 
-        if((view == buttonCreateAccount) && (confirmedPassword.equalsIgnoreCase(password))){
-
-                makeUsers(firstName, lastName, email, password);
+        if((view == buttonCreateAccount) && confirmedPassword.equals(password) && confirmedEmail.equals(email)){
+            makeUsers(firstName, lastName, email, password);
             }
-            else{
-                Toast.makeText(this, "Confirmation Failed!", Toast.LENGTH_SHORT).show();
-            }
+        else{
+            Toast.makeText(this, "Failed to confirm email or password.", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -73,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onComplete(@NonNull Task< AuthResult > task) {
                     if (task.isSuccessful()) {
-
                         Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
                         Intent mainIntent = new Intent(RegisterActivity.this, loginActivity.class);
                         startActivity(mainIntent);
@@ -82,13 +81,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         // If sign in fails, display a message to the user.
                         Toast.makeText(RegisterActivity.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
                     }
-
-                    // ...
                 }
             });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-
             String createUserEmail = editTextNewEmail.getText().toString();
             String createFirstName = editTextNewFirstName.getText().toString();
             String createLastName = editTextNewLastName.getText().toString();
@@ -99,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             User newUser = new User(createUserEmail, createFirstName, createLastName);
             myRef.push().setValue(newUser);
-    }
+            Toast.makeText(this, "Added user to database", Toast.LENGTH_SHORT).show();
+        }
     }
 }
