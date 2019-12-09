@@ -13,7 +13,7 @@ public class Movie {
     public String posterLink;
     public ArrayList<Pair<String, String>> ratings;
 
-    public Movie() {
+    public Movie(String tite, String descriptionMovie, String yearReleased, String genre, String director, ArrayList<Pair<String, String>> ratings) {
 
     }
 
