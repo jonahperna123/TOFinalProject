@@ -50,55 +50,42 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         String confirmedPassword = editTextConfirmPassword.getText().toString();
         String email = editTextNewEmail.getText().toString();
+        String confirmedEmail = editTextConfirmEmail.getText().toString();
         String password = editTextNewPassword.getText().toString();
         String firstName = editTextNewFirstName.getText().toString();
         String lastName = editTextNewLastName.getText().toString();
 
 
-        if((view == buttonCreateAccount) && (confirmedPassword.equalsIgnoreCase(password))){
-
-                makeUsers(firstName, lastName, email, password);
+        if((view == buttonCreateAccount) && confirmedPassword.equals(password) && confirmedEmail.equals(email)){
+            makeUsers(firstName, lastName, email, password);
             }
-            else{
-                Toast.makeText(this, "Confirmation Failed!", Toast.LENGTH_SHORT).show();
-            }
+        else{
+            Toast.makeText(this, "Failed to confirm email or password.", Toast.LENGTH_SHORT).show();
+        }
 
 
 
 }
 
-    private void makeUsers(String firstName, String lastName, String email, String password) {
+    private void makeUsers(final String firstName, final String lastName, final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener< AuthResult >() {
                 @Override
                 public void onComplete(@NonNull Task< AuthResult > task) {
-                    if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
+                    User newUser = new User(email, firstName, lastName);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference myRef = database.getReference("user");
+                    myRef.push().setValue(newUser);
 
-                        Toast.makeText(RegisterActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                        Intent mainIntent = new Intent(RegisterActivity.this, loginActivity.class);
-                        startActivity(mainIntent);
+                    Intent mainIntent = new Intent(RegisterActivity.this, homePageActivity.class);
+                    startActivity(mainIntent);
 
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(RegisterActivity.this, "Account Creation Failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                    // ...
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(RegisterActivity.this, "Account creation failed.", Toast.LENGTH_SHORT).show();
+                }
                 }
             });
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-
-            String createUserEmail = editTextNewEmail.getText().toString();
-            String createFirstName = editTextNewFirstName.getText().toString();
-            String createLastName = editTextNewLastName.getText().toString();
-
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference myRef = database.getReference("user");
-
-            User newUser = new User(createUserEmail, createFirstName, createLastName);
-            myRef.push().setValue(newUser);
-    }
     }
 }

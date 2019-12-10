@@ -1,31 +1,74 @@
 package com.example.tofinalproject;
 
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecyclerViewAdapter.ViewHolder> {
+
+    private ArrayList<Movie> movieArrayList;
+    private ArrayList<Episode> tvArrayList;
+    private Context nContext;
+    private boolean showMovie;
+
+    ProfileRecyclerViewAdapter(ArrayList<Movie> movieList, ArrayList<Episode> tvArrayList, Context nContext, boolean showMovie) {
+        this.movieArrayList = movieList;
+        this.nContext = nContext;
+        this.tvArrayList = tvArrayList;
+        this.showMovie = showMovie;
+    }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_list_content, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        if (showMovie) {
+            Movie movie = movieArrayList.get(position);
+            holder.contentName.setText(String.valueOf(position + 1) + ". " + movie.titleMovie);
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(nContext, movieArrayList.get(position).titleMovie, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Episode episode = tvArrayList.get(position);
+            holder.contentName.setText(String.valueOf(position + 1) + ". " + episode.seriesTitle + ": " + episode.episodeTitle);
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(nContext, tvArrayList.get(position).seriesTitle + ": " + tvArrayList.get(position).episodeTitle, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (showMovie) {
+            return movieArrayList.size();
+        }
+
+        return tvArrayList.size();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,7 +79,7 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
             super(itemView);
 
             contentName = itemView.findViewById(R.id.contentRecyclerView);
-            parentLayout = itemView.findViewById(R.id.parent);
+            parentLayout = itemView.findViewById(R.id.parentLayout);
         }
     }
 }

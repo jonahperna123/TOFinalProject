@@ -2,15 +2,19 @@ package com.example.tofinalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,28 +26,29 @@ import java.util.ArrayList;
 
 public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button testButton, buttonViewTvShows, buttonViewMovies;
+    Button buttonViewTvShows, buttonViewMovies;
     TextView textViewFollowers, textViewFollowing;
-    ArrayList<String> moviesRated, tvShowsRated;
+    ArrayList<Movie> moviesRated = new ArrayList<>();
+    ArrayList<Episode> tvShowsRated = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        testButton = findViewById(R.id.buttonTest);
         buttonViewTvShows = findViewById(R.id.buttonViewTVShows);
         buttonViewMovies = findViewById(R.id.buttonViewMovies);
 
         textViewFollowers = findViewById(R.id.textViewFollowersView);
         textViewFollowing = findViewById(R.id.textViewFollowingView);
 
-        testButton.setOnClickListener(this);
         buttonViewMovies.setOnClickListener(this);
         buttonViewTvShows.setOnClickListener(this);
 
+        setTestInformation();
         getUserInformation();
-        setMovieList();
+        initRecyclerView();
+
 
 
     }
@@ -67,10 +72,8 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
 
                 //DO THIS - grab values from realtime database
-                tvShowsRated =  new ArrayList<String>();
-                moviesRated=  new ArrayList<String>();
-
-
+//                tvShowsRated =  new ArrayList<>();
+//                moviesRated =  new ArrayList<>();
 
 
             }
@@ -83,24 +86,27 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    public void setMovieList() {
-
-           for (int i = 0; i < 10; ++i) {
-               String textInp = Integer.toString(i) + ". ";
-
-                if (i < moviesRated.size()){
-                    //put the movie
-                    textInp += moviesRated.get(i);
-                }
-
-
-           } //for each index
-
-
+    public void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.ratedContentContainer);
+        ProfileRecyclerViewAdapter recyclerViewAdapter = new ProfileRecyclerViewAdapter(moviesRated, tvShowsRated, this, true);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void setTvShowList() {
+    public void setMovieList() {
+        RecyclerView recyclerView = findViewById(R.id.ratedContentContainer);
+        ProfileRecyclerViewAdapter recyclerViewAdapter = new ProfileRecyclerViewAdapter(moviesRated, tvShowsRated, this, true);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
+
+
+    public void setTvShowList() {
+        RecyclerView recyclerView = findViewById(R.id.ratedContentContainer);
+        ProfileRecyclerViewAdapter recyclerViewAdapter = new ProfileRecyclerViewAdapter(moviesRated, tvShowsRated, this, false);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
@@ -113,48 +119,63 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             setTvShowList();
         }
 
+    }
 
 
+    public void setTestInformation() {
+
+        //set Movie  test information
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("user");
 
 
+        String firstName = "Test";
+        String lastName = "User";
+        String userName = "testUser1";
+        String email = "testuser@hotmail.com";
+        String id = "0000000";
+        String password = "password";
+        ArrayList<String> followers = new ArrayList<String>();
+        followers.add("testfollower1");
+        ArrayList<String> following = new ArrayList<String>();
+        following.add("testfollowing1");
+        int numFollowing = 1;
+        int numFollowers = 1;
+        String phoneNumber = "856-701-4203";
+        ArrayList<Movie> moviesRated = new ArrayList<>();
+        ArrayList<Episode> tvShowsRated = new ArrayList<>();
+        ArrayList<Pair<String, String>> ratings = new ArrayList<>();
+        ratings.add(Pair.create("IMDB", "10/10"));
 
-
-
-        if (view == testButton) {
-
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("user");
-
-
-            String firstName = "Test";
-            String lastName = "User";
-            String userName = "testUser1";
-            String email = "testuser@hotmail.com";
-            String id = "0000000";
-            String password = "password";
-            ArrayList<String> followers = new ArrayList<String>();
-            followers.add("testfollower1");
-            ArrayList<String> following = new ArrayList<String>();
-            following.add("testfollowing1");
-            int numFollowing = 1;
-            int numFollowers = 1;
-            String phoneNumber = "856-701-4203";
-            ArrayList<String> moviesRated = new ArrayList<String>();
-            ArrayList<String> tvShowsRated = new ArrayList<String>();
-            moviesRated.add("The Shawshank Redemption");
-            moviesRated.add("Mission Impossible");
-            moviesRated.add("Shrek");
-            moviesRated.add("Paranormal Activity");
-
-            tvShowsRated.add("Psych");
-            tvShowsRated.add("American Horror Story");
-
-            User userOne = new User(email, firstName, lastName);
-
-
-            myRef.setValue(userOne);
-
+        Movie movieOne = new Movie("Shrek", "A story of an ogre and his donkey",
+                "2000","Adventure", "The GingerBread Man", "asd", ratings);
+        for (int i = 0; i < 10; ++i){
+            this.moviesRated.add(movieOne);
         }
+
+        User userOne = new User(email, firstName, lastName);
+
+
+        myRef.setValue(userOne);
+
+
+        //set test Episode information
+         String seriesTitle = "Psych";
+         String episodeTitle = "Yang 3 in 2D";
+         String seasonNumber = "4";
+         String episodeNumber = "11";
+         String episodeDescription = "Shawn and gus fight a new yang";
+         String episodeRating = "10/10";
+
+         Episode testEpisode = new Episode(seriesTitle, episodeTitle, seasonNumber, episodeNumber, episodeDescription, episodeRating);
+
+         //populate episode
+        for (int i = 0; i < 10; ++i){
+            this.tvShowsRated.add(testEpisode);
+        }
+
+
     }
 
 
