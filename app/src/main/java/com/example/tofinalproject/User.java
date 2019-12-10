@@ -17,14 +17,14 @@ public class User {
 
     }
 
-    public User(String email, String firstName, String lastName ) {
+    public User(String email, String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.followers = new ArrayList<String>();
         this.following = new ArrayList<String>();
-        this.numFollowing = 0;
-        this.numFollowers = 0;
+        this.numFollowing = 12;
+        this.numFollowers = 16;
         this.phoneNumber = new String ();
     }
 }

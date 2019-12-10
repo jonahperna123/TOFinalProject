@@ -18,7 +18,8 @@ public class Movie {
 
     }
 
-    public Movie(String titleMovie, String idMovie, String descriptionMovie, String yearReleased, String genre, String director, String posterLink, ArrayList<Pair<String, String>> ratings) {
+    public Movie(String titleMovie, String idMovie, String descriptionMovie, String yearReleased, String genre, String director,
+                 String posterLink, ArrayList<Pair<String, String>> ratings) {
         this.titleMovie = titleMovie;
         this.idMovie = idMovie;
         this.descriptionMovie = descriptionMovie;
