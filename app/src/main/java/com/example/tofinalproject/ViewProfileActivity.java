@@ -148,7 +148,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         ArrayList<Pair<String, String>> ratings = new ArrayList<>();
         ratings.add(Pair.create("IMDB", "10/10"));
 
-        Movie movieOne = new Movie("Shrek", "A story of an ogre and his donkey",
+        Movie movieOne = new Movie("Shrek", "", "A story of an ogre and his donkey",
                 "2000","Adventure", "The GingerBread Man", "asd", ratings);
         for (int i = 0; i < 10; ++i){
             this.moviesRated.add(movieOne);

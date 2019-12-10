@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,18 +35,25 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     Button buttonSearch;
     TextView textViewResponse, textViewResponse2, textViewResponseNumber, textViewResponse3, textViewResponse4;
 
-    private RecyclerView recyclerView; //recycler view variable
+    private RecyclerView recyclerViewSocial;
+
     private RecyclerView.LayoutManager layoutManager; //layout manager for recycler view, need this for a recyclerview
 
-    private ArrayList<Movie> movies;
+    private ArrayList<Movie> moviesSearch;
+
+    ArrayList<Pair<String, String>> ratings = new ArrayList<>();
+
 
     private void initRecyclerView() {
 
-        recyclerView = findViewById(R.id.recyclerView); //Link recyclerview variable to xml
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(movies, this); //Linking the adapter to recyclerView,
+        recyclerViewSocial = findViewById(R.id.recyclerViewSocial); //Link recyclerview variable to xml
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(moviesSearch, this); //Linking the adapter to recyclerView,
         //check out the RecyclerViewAdapter (this is the hard part)
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //Setting the layout manager, commonly used is linear
+        recyclerViewSocial.setAdapter(adapter);
+        recyclerViewSocial.setLayoutManager(new LinearLayoutManager(this)); //Setting the layout manager, commonly used is linear
+
+        recyclerViewSocial.setHasFixedSize(true);
+
 
     }
 
@@ -64,11 +72,12 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 //        textViewResponse4 = findViewById(R.id.textViewResponse4);
 //        textViewResponseNumber = findViewById(R.id.textViewResponseNumber);
 
-        movies = new ArrayList<Movie>();
-
+        moviesSearch = new ArrayList<Movie>();
 
         buttonSearch.setOnClickListener(this);
+
         initRecyclerView();
+
     }
 
     @Override
@@ -119,6 +128,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         String contentSearchText = editTextSearch.getText().toString();
+
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -197,15 +207,12 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
                         Toast.makeText(SocialActivity.this, "Result: " + movie_title + ", " + movie_id, Toast.LENGTH_SHORT).show();
 
-                        movies.add(new Movie(movie_title, movie_id));
-
+                        moviesSearch.add(new Movie(movie_title, movie_id, "", "", "", "", "", ratings));
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
 
             }
         }, new Response.ErrorListener() {

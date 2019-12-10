@@ -38,13 +38,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, final int position) {
 
-        holder.textViewTitle.setText(movies.get(position).movie_title);
-        holder.textViewId.setText(movies.get(position).movie_id);
+        holder.textViewTitle.setText(movies.get(position).titleMovie);
+        holder.textViewId.setText(movies.get(position).idMovie);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, movies.get(position).movie_title, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, movies.get(position).titleMovie, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -63,8 +63,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewTitle = itemView.findViewById(R.id.textView);
-            textViewId = itemView.findViewById(R.id.textView2);
+            textViewTitle = itemView.findViewById(R.id.textViewMovieLayoutItemTitle);
+            textViewId = itemView.findViewById(R.id.textViewMovieLayoutItemId);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
 
