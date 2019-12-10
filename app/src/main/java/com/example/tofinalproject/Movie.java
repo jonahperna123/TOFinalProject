@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Movie {
     public String titleMovie;
+    public String idMovie;
     public String descriptionMovie;
     public String yearReleased;
     public String genre;
@@ -17,8 +18,10 @@ public class Movie {
 
     }
 
-    public Movie(String titleMovie, String descriptionMovie, String yearReleased, String genre, String director, String posterLink, ArrayList<Pair<String, String>> ratings) {
+    public Movie(String titleMovie, String idMovie, String descriptionMovie, String yearReleased, String genre, String director,
+                 String posterLink, ArrayList<Pair<String, String>> ratings) {
         this.titleMovie = titleMovie;
+        this.idMovie = idMovie;
         this.descriptionMovie = descriptionMovie;
         this.yearReleased = yearReleased;
         this.genre = genre;

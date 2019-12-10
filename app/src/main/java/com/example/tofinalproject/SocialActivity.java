@@ -2,9 +2,12 @@ package com.example.tofinalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,11 +27,35 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class SocialActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextSearch;
     Button buttonSearch;
-    TextView textViewResponse, textViewResponse2, textViewResponseNumber, textViewResponse3;
+    TextView textViewSearchReult, yearReleased, textViewResponse2, textViewResponseNumber, textViewResponse3, textViewResponse4;
+
+    private RecyclerView recyclerViewSocial;
+
+    private RecyclerView.LayoutManager layoutManager; //layout manager for recycler view, need this for a recyclerview
+
+    private ArrayList<Movie> moviesSearch;
+
+    ArrayList<Pair<String, String>> ratings = new ArrayList<>();
+
+
+//    private void initRecyclerView() {
+//
+//        recyclerViewSocial = findViewById(R.id.recyclerViewSocial); //Link recyclerview variable to xml
+//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(moviesSearch, this); //Linking the adapter to recyclerView,
+//        //check out the RecyclerViewAdapter (this is the hard part)
+//        recyclerViewSocial.setAdapter(adapter);
+//        recyclerViewSocial.setLayoutManager(new LinearLayoutManager(this)); //Setting the layout manager, commonly used is linear
+//
+//        recyclerViewSocial.setHasFixedSize(true);
+//
+//
+//    }
 
 
     @Override
@@ -39,12 +66,19 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
-        textViewResponse = findViewById(R.id.textViewResponse);
-        textViewResponse2 = findViewById(R.id.textViewResponse2);
-        textViewResponse3 = findViewById(R.id.textViewResponse3);
-        textViewResponseNumber = findViewById(R.id.textViewResponseNumber);
+        textViewSearchReult = findViewById(R.id.textViewTitle);
+        yearReleased = findViewById(R.id.textViewYearSearchResult);
+//        textViewResponse = findViewById(R.id.textViewResponse);
+//        textViewResponse2 = findViewById(R.id.textViewResponse2);
+//        textViewResponse3 = findViewById(R.id.textViewResponse3);
+//        textViewResponse4 = findViewById(R.id.textViewResponse4);
+//        textViewResponseNumber = findViewById(R.id.textViewResponseNumber);
+
+        moviesSearch = new ArrayList<Movie>();
 
         buttonSearch.setOnClickListener(this);
+
+//        initRecyclerView();
 
     }
 
@@ -97,97 +131,112 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         String contentSearchText = editTextSearch.getText().toString();
 
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url2 ="https://api.themoviedb.org/3/search/movie?api_key=4c6eb1a29b65b0358211ff79367ee62f&language=en-US&query=" + contentSearchText + "&page=1&include_adult=false";
-
-//        String url = "https://api.themoviedb.org/3/search/movie?api_key=4c6eb1a29b65b0358211ff79367ee62f&language=en-US&query=Avengers&page=1&include_adult=false";
-
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url2, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-
-//                    textViewResponse2.setText("Response: "+ response.substring(0, 1000));
-
-                    //grabbing total results number
-                    String resultsNumber = "total_results";
-                    int firstBreakResults = response.indexOf(resultsNumber) + resultsNumber.length() + 2;
-                    int secondBreakResults = response.indexOf("total_pages") - 2;
-                    textViewResponseNumber.setText(response.substring(firstBreakResults, secondBreakResults));
-
-                    //grabs length of response to set boundary for substring
-                    int totalLength = response.length();
-                    int breakNumber = 0;
-                    String title = "original_title";
-
-                    String allTitles = "Titles: ";
-
-                    //TO FIX: when number of results is greater than 20, app breaks
-                    int index = Integer.parseInt(response.substring(firstBreakResults, secondBreakResults));
-                    if (index > 20) {
-                        index = 20;
-                    }
-
-                    //for loop loops through the number of results returned, searches by indexOf for "original_title"
-                    for (int i = 0; i < index; i++) {
-                        if (i == 0) {
-                            int firstBreakTitle = response.indexOf(title) + title.length() + 3;
-                            int secondBreakTitle = response.indexOf("genre_ids") - 3;
-
-                            Toast.makeText(SocialActivity.this, "Break 1: " + firstBreakTitle + " Break 2: " + secondBreakTitle, Toast.LENGTH_SHORT).show();
-
-                            textViewResponse.setText(response.substring(firstBreakTitle, secondBreakTitle));
-
-                            allTitles = allTitles + " || "+ response.substring(firstBreakTitle, secondBreakTitle);
-
-                            breakNumber = secondBreakTitle + 4;
-
-                        } else {
-
-                            String tempString = response.substring(breakNumber, totalLength);
-
-                            int firstBreakTitle = tempString.indexOf(title) + title.length() + 3;
-                            int secondBreakTitle = tempString.indexOf("genre_ids") - 3;
-
-//                            Toast.makeText(SocialActivity.this, "BREAK NUMBER: " + firstBreakTitle + ", " + secondBreakTitle, Toast.LENGTH_SHORT).show();
-
-                            breakNumber = breakNumber + secondBreakTitle + 4;
-
-                            textViewResponse2.setText(tempString.substring(firstBreakTitle, secondBreakTitle));
-
-                            allTitles = allTitles + " || "+ tempString.substring(firstBreakTitle, secondBreakTitle);
-
-                            textViewResponse3.setText(allTitles);
-
-                        }
-                    }
+        textViewSearchReult.setText("The Shawshank Redemption");
+        yearReleased.setText("1994");
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(SocialActivity.this, "Response: " + error, Toast.LENGTH_SHORT).show();
-
-                textViewResponse.setText("That didn't work!");
-
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
+//
+//        // Instantiate the RequestQueue.
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        String url2 ="https://api.themoviedb.org/3/search/movie?api_key=4c6eb1a29b65b0358211ff79367ee62f&language=en-US&query=" + contentSearchText + "&page=1&include_adult=false";
+//
+//
+//        // Request a string response from the provided URL.
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url2, new Response.Listener<String>() {
+//
+//            @Override
+//            public void onResponse(String response) {
+//
+//                try {
+//                    JSONObject jsonResponse = new JSONObject(response);
+//
+////                    textViewResponse2.setText("Response: "+ response.substring(0, 1000));
+//
+//                    //grabbing total results number
+//                    String resultsNumber = "total_results";
+//                    int firstBreakResults = response.indexOf(resultsNumber) + resultsNumber.length() + 2;
+//                    int secondBreakResults = response.indexOf("total_pages") - 2;
+////                    textViewResponseNumber.setText(response.substring(firstBreakResults, secondBreakResults));
+//
+//                    //grabs length of response to set boundary for substring
+//                    int totalLength = response.length();
+//                    int breakNumber = 0;
+//                    String title = "original_title";
+//                    String forId1 = "\"id\":";
+//                    String forId2 = "adult";
+//
+//                    String allTitles = "Titles: ";
+//                    String allIds = "Ids: ";
+//
+//                    //TO FIX: when number of results is greater than 20, app breaks
+//                    int index = Integer.parseInt(response.substring(firstBreakResults, secondBreakResults));
+//                    if (index > 20) {
+//                        index = 20;
+//                    }
+//
+//                    //for loop loops through the number of results returned, searches by indexOf for "original_title"
+//                    for (int i = 0; i < 10; i++) {
+//
+//                            String tempString = response.substring(breakNumber, totalLength);
+//
+//                            int firstBreakTitle = tempString.indexOf(title) + title.length() + 3;
+//                            int secondBreakTitle = tempString.indexOf("genre_ids") - 3;
+//
+//                            String movie_id = "00000";
+//
+//                            while (i < 5) {
+//                                int firstBreakId = tempString.indexOf(forId1) + forId1.length();
+//                                int secondBreakId = tempString.indexOf(forId2) - 2;
+//
+//                                if (tempString.substring(firstBreakId, secondBreakId).length() > 10) {
+//                                    forId2 = "video";
+//                                    secondBreakId = tempString.indexOf(forId2) - 2;
+//                                }
+//
+//                                movie_id = tempString.substring(firstBreakId, secondBreakId);
+//
+//                            }
+//
+////                            Toast.makeText(SocialActivity.this, "BREAK NUMBER: " + firstBreakTitle + ", " + secondBreakTitle, Toast.LENGTH_SHORT).show();
+//
+//                            breakNumber = breakNumber + secondBreakTitle + 4;
+//
+////                        Toast.makeText(SocialActivity.this, "ID: " + tempString.substring(firstBreakId, secondBreakId), Toast.LENGTH_SHORT).show();
+//
+////                        if (i == 0) {
+////                                textViewResponse.setText(response.substring(firstBreakTitle, secondBreakTitle));
+////                            } else {
+////                                textViewResponse2.setText(tempString.substring(firstBreakTitle, secondBreakTitle));
+////                            }
+//
+//                        String movie_title = tempString.substring(firstBreakTitle, secondBreakTitle);
+//
+//                        Toast.makeText(SocialActivity.this, "Result: " + movie_title + ", " + movie_id, Toast.LENGTH_SHORT).show();
+//
+//                        moviesSearch.add(new Movie(movie_title, movie_id, "", "", "", "", "", ratings));
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                Toast.makeText(SocialActivity.this, "Response: " + error, Toast.LENGTH_SHORT).show();
+//
+//                String errorMessage = "That didn't work!";
+//
+////                textViewResponse.setText(errorMessage);
+//
+//            }
+//        });
+//
+//        // Add the request to the RequestQueue.
+//        queue.add(stringRequest);
+//
     }
 
 }

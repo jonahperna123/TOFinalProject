@@ -42,6 +42,7 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
         if (showMovie) {
             Movie movie = movieArrayList.get(position);
             holder.contentName.setText(String.valueOf(position + 1) + ". " + movie.titleMovie);
+            holder.textViewYearReleased.setText(movie.yearReleased);
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -51,6 +52,7 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
         } else {
             Episode episode = tvArrayList.get(position);
             holder.contentName.setText(String.valueOf(position + 1) + ". " + episode.seriesTitle + ": " + episode.episodeTitle);
+            holder.textViewYearReleased.setText(episode.yearReleased);
             holder.parentLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -73,13 +75,14 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView contentName;
+        TextView contentName, textViewYearReleased;
         RelativeLayout parentLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             contentName = itemView.findViewById(R.id.contentRecyclerView);
             parentLayout = itemView.findViewById(R.id.parentLayout);
+            textViewYearReleased = itemView.findViewById(R.id.textViewYearReleased);
         }
     }
 }

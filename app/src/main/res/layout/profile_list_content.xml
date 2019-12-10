@@ -10,10 +10,20 @@
         android:id="@+id/contentRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
         android:text="Movie"
         android:textColor="#000"
         android:textSize="17sp"
 
         />
+
+    <TextView
+        android:id="@+id/textViewYearReleased"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:layout_toRightOf="@id/contentRecyclerView"
+        android:text="Year"
+        android:textColor="#000"
+        android:textSize="17sp"
+        android:textStyle="italic" />
 </RelativeLayout>
