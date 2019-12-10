@@ -18,11 +18,15 @@ import java.util.ArrayList;
 public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Movie> movieArrayList;
+    private ArrayList<Episode> tvArrayList;
     private Context nContext;
+    private boolean showMovie;
 
-    ProfileRecyclerViewAdapter(ArrayList<Movie> movieList, Context nContext) {
+    ProfileRecyclerViewAdapter(ArrayList<Movie> movieList, ArrayList<Episode> tvArrayList, Context nContext, boolean showMovie) {
         this.movieArrayList = movieList;
         this.nContext = nContext;
+        this.tvArrayList = tvArrayList;
+        this.showMovie = showMovie;
     }
 
     @NonNull
@@ -35,19 +39,36 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.contentName.setText(movieArrayList.get(position).titleMovie);
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(nContext, movieArrayList.get(position).titleMovie, Toast.LENGTH_LONG).show();
-            }
-        });
+        if (showMovie) {
+            Movie movie = movieArrayList.get(position);
+            holder.contentName.setText(String.valueOf(position + 1) + ". " + movie.titleMovie);
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(nContext, movieArrayList.get(position).titleMovie, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            Episode episode = tvArrayList.get(position);
+            holder.contentName.setText(String.valueOf(position + 1) + ". " + episode.seriesTitle + ": " + episode.episodeTitle);
+            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(nContext, tvArrayList.get(position).seriesTitle + ": " + tvArrayList.get(position).episodeTitle, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
     }
 
     @Override
     public int getItemCount() {
+        if (showMovie) {
+            return movieArrayList.size();
+        }
 
-        return 0;
+        return tvArrayList.size();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

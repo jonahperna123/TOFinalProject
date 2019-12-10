@@ -88,31 +88,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonViewMovies" />
 
-    <TextView
-        android:id="@+id/textViewYourReviewsHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="228dp"
-        android:text="Your Reviews"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContainerHeader" />
-
-    <Button
-        android:id="@+id/buttonTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="31dp"
-        android:layout_marginTop="28dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <RelativeLayout
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
-        android:layout_height="450px"
+        android:layout_height="500px"
         android:layout_marginTop="28dp"
+        android:background="#00A88888"
+        android:backgroundTint="#00A88888"
         app:layout_constraintTop_toBottomOf="@+id/textViewContainerHeader"
         tools:layout_editor_absoluteX="140dp">
 
@@ -120,7 +102,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ratedContentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="#00A88888"
+            android:backgroundTint="#00A88888" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
