@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class AddReviewActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, View.OnClickListener {
 
@@ -48,18 +49,22 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
 
+        Intent intent = getIntent();
+
+        String movie_title = intent.getStringExtra("movie_title");
+        String movie_poster = intent.getStringExtra("movie_poster");
+
         // set title to "Add Review for {{movie title}}"
         textViewHeader = findViewById(R.id.textViewHeader_AddReviewActivity);
-        textViewHeader.setText(getString(R.string.header_AddReviewActivity, contentTitle));
+        textViewHeader.setText(getString(R.string.header_AddReviewActivity, movie_title));
 
         // display the current movie title
         textViewTitle = findViewById(R.id.textViewTitle_AddReviewActivity);
-        textViewTitle.setText(getString(R.string.title_AddReviewActivity, contentTitle));
+        textViewTitle.setText(getString(R.string.title_AddReviewActivity, movie_title));
 
         // display the current movie's poster
         imageViewMoviePoster = findViewById(R.id.imageViewMoviePoster_AddReviewActivity);
-        // TODO: grab image from API
-        // imageViewMoviePoster.setImageDrawable(Drawable(file_path etc));
+        Picasso.get().load(movie_poster).into(imageViewMoviePoster);
 
         // user can set rating
         ratingBar = findViewById(R.id.ratingBar);

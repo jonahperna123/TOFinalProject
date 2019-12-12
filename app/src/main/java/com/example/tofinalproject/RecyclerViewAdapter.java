@@ -1,10 +1,12 @@
 package com.example.tofinalproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +19,11 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.viewHolder> {
 
     private ArrayList<Movie> movies;
-    private Context mContext;
+    private Context nContext;
 
-
-
-    RecyclerViewAdapter(ArrayList<Movie> movies, Context mContext) {
+    RecyclerViewAdapter(ArrayList<Movie> movies, Context nContext) {
         this.movies = movies;
-        this.mContext = mContext;
+        this.nContext = nContext;
     }
 
     @NonNull
@@ -31,6 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem, viewGroup, false);
+
         viewHolder view_holder = new viewHolder(view);
         return view_holder;
     }
@@ -44,7 +45,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, movies.get(position).titleMovie, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(nContext, movies.get(position).idMovie, Toast.LENGTH_SHORT).show();
+
+                final Intent intent;
+
+                intent =  new Intent(nContext, MovieActivity.class);
+                intent.putExtra("movie_id", movies.get(position).idMovie);
+
+                nContext.startActivity(intent);
+
+
             }
         });
 
@@ -52,13 +62,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movies.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewTitle, textViewId;
-        RelativeLayout parentLayout;
+        LinearLayout parentLayout;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,4 +80,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
     }
+
 }

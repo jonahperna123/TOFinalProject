@@ -28,55 +28,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
 
-    <TextView
-        android:id="@+id/textViewSearchResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSearch"
-        android:layout_marginTop="25px"
-        android:text="Title"
-        android:layout_marginLeft="25px"
-
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="560px"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewSearchResult"
-        android:layout_margin="25px"
-        android:layout_marginStart="25px"
-        android:layout_marginTop="25px"
-        android:layout_marginEnd="25px"
-        android:layout_marginBottom="25px"
-        android:text=""
-        android:textSize="18sp"
-        android:textColor="#000"
-        />
-
-    <TextView
-        android:id="@+id/textViewYearHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSearch"
-        android:layout_toRightOf="@id/textViewSearchResult"
-        android:text="Year"
-        android:layout_marginTop="25px"
-        android:layout_marginLeft="600px"
-        android:textSize="24sp"
-        />
-
-    <TextView
-        android:id="@+id/textViewYearSearchResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewYearHeader"
-        android:layout_toRightOf="@id/textViewTitle"
-        android:layout_marginLeft="200px"
-        android:textSize="18sp"
-        android:textColor="#000"
-
-
-        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewSocial"
+        android:layout_width="match_parent"
+        android:layout_height="585dp"
+        android:layout_alignTop="@+id/editTextSearch"
+        android:layout_marginTop="116dp" />
 
 </RelativeLayout>
