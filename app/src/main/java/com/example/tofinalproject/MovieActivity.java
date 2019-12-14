@@ -3,7 +3,6 @@ package com.example.tofinalproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Cache;
 import com.android.volley.Network;
@@ -25,13 +23,15 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-public class MovieActivity extends AppCompatActivity implements View.OnClickListener {
+public class MovieActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     TextView textViewMovieTitle, textViewDescription;
     Button buttonReviewMovie;
     ImageView imageViewPoster;
+    BottomNavigationView nav;
 
     String movie_title;
     String poster_url;
@@ -46,6 +46,12 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
         textViewDescription = findViewById(R.id.textViewDescription);
         buttonReviewMovie = findViewById(R.id.buttonReviewMovie);
         imageViewPoster = findViewById(R.id.imageViewPoster);
+
+        // handle nav menu
+        nav = findViewById(R.id.nav_MovieActivity);
+        nav.setOnNavigationItemSelectedListener(this);
+        // unselect first item in navbar, we are not on "Home"
+        nav.getMenu().getItem(0).setCheckable(false);
 
         buttonReviewMovie.setOnClickListener(this);
 
@@ -141,10 +147,6 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -154,7 +156,7 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {
@@ -177,5 +179,27 @@ public class MovieActivity extends AppCompatActivity implements View.OnClickList
 
         startActivity(movieReviewIntent);
 
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home_BottomNavBar:
+                // re-select "Home" upon click
+                nav.getMenu().getItem(0).setCheckable(true);
+                Intent homeIntent = new Intent(this, homePageActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.search_BottomNavBar:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.profile_BottomNavBar:
+                Intent profileIntent = new Intent(this, ViewProfileActivity.class);
+                startActivity(profileIntent);
+                return true;
+            default:
+                return false;
+        }
     }
 }

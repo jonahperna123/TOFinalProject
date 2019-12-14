@@ -1,51 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MovieActivity">
 
-    <ImageView
-        android:id="@+id/imageViewPoster"
-        android:layout_width="343dp"
-        android:layout_height="182dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[2]" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/nav_MovieActivity">
 
-    <TextView
-        android:id="@+id/textViewMovieTitle"
-        android:layout_width="410dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:text="Title"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewPoster" />
+        <ImageView
+            android:id="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            tools:srcCompat="@tools:sample/avatars[2]" />
 
-    <TextView
-        android:id="@+id/textViewDescription"
-        android:layout_width="364dp"
-        android:layout_height="205dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:text="Description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMovieTitle" />
+        <TextView
+            android:id="@+id/textViewMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:text="Title"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:maxEms="10"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_below="@id/imageViewPoster" />
 
-    <Button
-        android:id="@+id/buttonReviewMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="20dp"
-        android:text="Review Movie"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="textStart"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:maxEms="15"
+            android:text="Description"
+            android:layout_below="@+id/textViewMovieTitle" />
+
+        <Button
+            android:id="@+id/buttonReviewMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="20dp"
+            android:text="Review Movie"
+            android:layout_below="@+id/textViewDescription" />
+    </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_MovieActivity"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottomnavbar"/>
+
+
+</RelativeLayout>

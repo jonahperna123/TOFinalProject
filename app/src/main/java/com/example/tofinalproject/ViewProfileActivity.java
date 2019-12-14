@@ -1,7 +1,6 @@
 package com.example.tofinalproject;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -300,10 +297,6 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -313,7 +306,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {

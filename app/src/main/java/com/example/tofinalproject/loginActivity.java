@@ -106,10 +106,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -119,7 +115,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {

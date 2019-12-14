@@ -16,13 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseError;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -30,10 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class AddReviewActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, View.OnClickListener {
+public class AddReviewActivity extends AppCompatActivity implements RatingBar.OnRatingBarChangeListener, View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     // TODO: take out, replace with info taken from MovieActivity
-    String contentTitle = "The Joker";
     String contentType = "movie";
 
     TextView textViewHeader, textViewTitle;
@@ -41,6 +37,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
     RatingBar ratingBar;
     EditText editTextReview;
     Button buttonSubmit;
+    BottomNavigationView nav;
 
     private FirebaseAuth auth;
 
@@ -48,6 +45,12 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_review);
+
+        // add navbar
+        nav = findViewById(R.id.nav_AddReviewActivity);
+        nav.setOnNavigationItemSelectedListener(this);
+        // unselect first item in navbar, we are not on "Home"
+        nav.getMenu().getItem(0).setCheckable(false);
 
         Intent intent = getIntent();
 
@@ -67,7 +70,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
         Picasso.get().load(movie_poster).into(imageViewMoviePoster);
 
         // user can set rating
-        ratingBar = findViewById(R.id.ratingBar);
+        ratingBar = findViewById(R.id.ratingBar_AddReviewActivity);
         ratingBar.setOnRatingBarChangeListener(this);
 
         // user can add text review
@@ -120,10 +123,6 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -133,7 +132,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {
@@ -175,7 +174,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
             // create Review object
             float rating = ratingBar.getRating();
             String review = editTextReview.getText().toString();
-            Review r = new Review(rating, review, currentUser.getEmail(), contentType, contentTitle);
+            Review r = new Review(rating, review, currentUser.getEmail(), contentType, textViewTitle.getText().toString());
 
             // access the reviews node of database
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -191,6 +190,28 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
                     }
                 }
             });
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home_BottomNavBar:
+                // re-select "Home" upon click
+                nav.getMenu().getItem(0).setCheckable(true);
+                Intent homeIntent = new Intent(this, homePageActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.search_BottomNavBar:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.profile_BottomNavBar:
+                Intent profileIntent = new Intent(this, ViewProfileActivity.class);
+                startActivity(profileIntent);
+                return true;
+            default:
+                return false;
         }
     }
 }

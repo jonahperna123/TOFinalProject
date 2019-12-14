@@ -1,77 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddReviewActivity">
 
-    <TextView
-        android:id="@+id/textViewHeader_AddReviewActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="@string/header_AddReviewActivity"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/frame_AddReviewActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewTitle_AddReviewActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/title_AddReviewActivity"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewHeader_AddReviewActivity" />
+        <TextView
+            android:id="@+id/textViewHeader_AddReviewActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/header_AddReviewActivity"
+            android:textSize="24sp"
+            android:maxEms="9"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:id="@+id/imageViewMoviePoster_AddReviewActivity"
-        android:layout_width="136dp"
-        android:layout_height="168dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle_AddReviewActivity"
-        app:srcCompat="?android:attr/colorPrimary" />
+        <TextView
+            android:id="@+id/textViewTitle_AddReviewActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/title_AddReviewActivity"
+            android:textColor="#000"
+            android:textSize="21sp"
+            android:textAlignment="center"
+            android:layout_below="@+id/textViewHeader_AddReviewActivity"
+            android:layout_centerHorizontal="true"/>
 
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="246dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="25dp"
-        android:isIndicator="false"
-        android:stepSize="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewMoviePoster_AddReviewActivity" />
+        <ImageView
+            android:id="@+id/imageViewMoviePoster_AddReviewActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="?android:attr/colorPrimary"
+            android:layout_below="@+id/textViewTitle_AddReviewActivity"
+            android:layout_centerHorizontal="true"/>
 
-    <EditText
-        android:id="@+id/editTextReview_AddReviewActivity"
-        android:layout_width="286dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Describe in 5 words..."
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        <RatingBar
+            android:id="@+id/ratingBar_AddReviewActivity"
+            android:layout_width="246dp"
+            android:layout_height="49dp"
+            android:layout_margin="25dp"
+            android:isIndicator="false"
+            android:stepSize="0.5"
+            android:layout_below="@+id/imageViewMoviePoster_AddReviewActivity"
+            android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/buttonSubmit_AddReviewActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="Review"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextReview_AddReviewActivity" />
+        <EditText
+            android:id="@+id/editTextReview_AddReviewActivity"
+            android:layout_width="286dp"
+            android:layout_height="48dp"
+            android:layout_margin="15dp"
+            android:ems="10"
+            android:hint="Describe in 5 words..."
+            android:inputType="textPersonName"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ratingBar_AddReviewActivity"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonSubmit_AddReviewActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:text="Review"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/editTextReview_AddReviewActivity" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/nav_AddReviewActivity"
+        app:menu="@menu/bottomnavbar"/>
+
+</RelativeLayout>

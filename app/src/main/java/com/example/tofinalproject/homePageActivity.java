@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -19,14 +21,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class homePageActivity extends AppCompatActivity {
+public class homePageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth auth;
     private ArrayList<Review> reviews;
+
+    private BottomNavigationView nav;
+    private FrameLayout frame;
 
     private RecyclerView recyclerView;
     private HomeRecyclerViewAdapter mAdapter;
@@ -36,6 +40,10 @@ public class homePageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
+        nav = findViewById(R.id.nav_HomePageActivity);
+        nav.setOnNavigationItemSelectedListener(this);
+        frame = findViewById(R.id.frame_HomePageActivity);
 
         auth = FirebaseAuth.getInstance();
 
@@ -74,10 +82,6 @@ public class homePageActivity extends AppCompatActivity {
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -87,7 +91,7 @@ public class homePageActivity extends AppCompatActivity {
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {
@@ -152,6 +156,25 @@ public class homePageActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) { }
             });
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home_BottomNavBar:
+                // already in home
+                return true;
+            case R.id.search_BottomNavBar:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.profile_BottomNavBar:
+                Intent profileIntent = new Intent(this, ViewProfileActivity.class);
+                startActivity(profileIntent);
+                return true;
+            default:
+                return false;
         }
     }
 }

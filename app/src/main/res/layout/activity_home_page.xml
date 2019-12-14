@@ -6,9 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".homePageActivity">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_HomePageActivity"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/frame_HomePageActivity"
+        android:layout_above="@+id/nav_HomePageActivity">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView_HomePageActivity"/>
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/nav_HomePageActivity"
+        app:menu="@menu/bottomnavbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"/>
 </RelativeLayout>

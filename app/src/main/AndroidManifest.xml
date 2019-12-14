@@ -10,12 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".MessageActivity" />
         <activity android:name=".AddReviewActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".homePageActivity" />
         <activity android:name=".MovieActivity" />
-        <activity android:name=".SocialActivity" />
+        <activity android:name=".SearchActivity" />
         <activity android:name=".loginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

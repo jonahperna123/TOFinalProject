@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
@@ -28,14 +27,13 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SocialActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editTextSearch;
     Button buttonSearch;
@@ -67,7 +65,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_social);
+        setContentView(R.layout.activity_search);
 
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
@@ -99,10 +97,6 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
             Intent homeIntent = new Intent(this, homePageActivity.class);
             startActivity(homeIntent);
 
-        } else if (item.getItemId() == R.id.itemMessage) {
-            Intent messageIntent = new Intent(this, MessageActivity.class);
-            startActivity(messageIntent);
-
         } else if (item.getItemId() == R.id.itemMovie) {
             Intent movieIntent = new Intent(this, MovieActivity.class);
             startActivity(movieIntent);
@@ -112,7 +106,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(reviewIntent);
 
         } else if (item.getItemId() == R.id.itemSocial) {
-            Intent socialIntent = new Intent(this, SocialActivity.class);
+            Intent socialIntent = new Intent(this, SearchActivity.class);
             startActivity(socialIntent);
 
         } else if (item.getItemId() == R.id.itemProfile) {
@@ -206,7 +200,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
                         String movie_title = tempString.substring(firstBreakTitle, secondBreakTitle);
 
-//                        Toast.makeText(SocialActivity.this, "Result: " + movie_title + ", " + movie_id, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SearchActivity.this, "Result: " + movie_title + ", " + movie_id, Toast.LENGTH_SHORT).show();
 
                        Log.d("MOVIE INFO: ", "Current Movie Object: " + movie_title + ", " + movie_id);
 
@@ -217,7 +211,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
                 } catch (JSONException e) {
                     e.printStackTrace();
 
-                    Toast.makeText(SocialActivity.this, "Error" + e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, "Error" + e, Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -226,7 +220,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(SocialActivity.this, "Response: " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, "Response: " + error, Toast.LENGTH_SHORT).show();
 
                 String errorMessage = "That didn't work!";
 
