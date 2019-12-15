@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,10 +25,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     Button buttonViewTvShows, buttonViewMovies;
     TextView textViewFollowers, textViewFollowing;
+    BottomNavigationView nav;
+
     ArrayList<Movie> moviesRated = new ArrayList<>();
     ArrayList<Episode> tvShowsRated = new ArrayList<>();
     ArrayList<Review> userReviews = new ArrayList<>();
@@ -36,6 +39,11 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
+
+        nav = findViewById(R.id.nav_ViewProfileActivity);
+        // select Profile as the checked item
+        nav.setSelectedItemId(R.id.profile_BottomNavBar);
+        nav.setOnNavigationItemSelectedListener(this);
 
         buttonViewTvShows = findViewById(R.id.buttonViewTVShows);
         buttonViewMovies = findViewById(R.id.buttonViewMovies);
@@ -318,4 +326,22 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home_BottomNavBar:
+                Intent homeIntent = new Intent(this, homePageActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.search_BottomNavBar:
+                Intent searchIntent = new Intent(this, SearchActivity.class);
+                startActivity(searchIntent);
+                return true;
+            case R.id.profile_BottomNavBar:
+                // already in Profile
+                return true;
+            default:
+                return false;
+        }
+    }
 }

@@ -1,145 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewProfileActivity">
 
-    <TextView
-        android:id="@+id/textViewProfileHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="39dp"
-        android:text="Profile"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewFollowers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="63dp"
-        android:layout_marginTop="20dp"
-        android:text="Followers"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfileHeader" />
-
-    <TextView
-        android:id="@+id/textViewFollowing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="43dp"
-        android:text="Following"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewFollowers"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewFollowersView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
-
-    <TextView
-        android:id="@+id/textViewFollowingView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="72dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFollowing" />
-
-    <Button
-        android:id="@+id/buttonViewMovies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="45dp"
-        android:text="Movies"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/buttonViewTVShows"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="96dp"
-        android:text="TV Shows"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
-
-    <TextView
-        android:id="@+id/textViewContainerHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="18dp"
-        android:text="Your Top 10"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonViewMovies" />
-
-    <RelativeLayout
-        android:id="@+id/contentContainer"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500px"
-        android:layout_marginTop="28dp"
-        android:background="#00A88888"
-        android:backgroundTint="#00A88888"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContainerHeader"
-        tools:layout_editor_absoluteX="140dp">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/nav_ViewProfileActivity">
 
+        <TextView
+            android:id="@+id/textViewProfileHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="20dp"
+            android:text="Profile"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ratedContentContainer"
+        <TextView
+            android:id="@+id/textViewFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="20dp"
+            android:textColor="#000"
+            android:text="Followers"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/textViewProfileHeader" />
+
+        <TextView
+            android:id="@+id/textViewFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginEnd="43dp"
+            android:text="Following"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textViewFollowers"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewFollowersView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="228dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
+
+        <TextView
+            android:id="@+id/textViewFollowingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="72dp"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFollowing" />
+
+        <Button
+            android:id="@+id/buttonViewMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="20dp"
+            android:text="Movies"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <Button
+            android:id="@+id/buttonViewTVShows"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="62dp"
+            android:layout_marginEnd="100dp"
+            android:text="TV Shows"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
+
+        <TextView
+            android:id="@+id/textViewContainerHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="10dp"
+            android:text="Your Top 10"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonViewMovies" />
+
+        <RelativeLayout
+            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="500px"
+            android:layout_marginTop="28dp"
             android:background="#00A88888"
-            android:backgroundTint="#00A88888" />
-    </RelativeLayout>
+            android:backgroundTint="#00A88888"
+            app:layout_constraintTop_toBottomOf="@+id/textViewContainerHeader"
+            tools:layout_editor_absoluteX="140dp">
 
-    <TextView
-        android:id="@+id/textViewReviewHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="8dp"
-        android:text="Your Reviews"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contentContainer" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="275px"
-        android:layout_marginTop="7dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewReviewHeader"
-        tools:layout_editor_absoluteX="16dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ratedContentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#00A88888"
+                android:backgroundTint="#00A88888" />
+        </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reviewContentContainer"
+        <TextView
+            android:id="@+id/textViewReviewHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="8dp"
+            android:textColor="#000"
+            android:text="Your Reviews"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contentContainer" />
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </RelativeLayout>
+            android:layout_height="275px"
+            android:layout_marginTop="7dp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewReviewHeader"
+            tools:layout_editor_absoluteX="16dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="14dp"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewContentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="14dp"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/nav_ViewProfileActivity"
+        app:menu="@menu/bottomnavbar"/>
+
+
+</RelativeLayout>
