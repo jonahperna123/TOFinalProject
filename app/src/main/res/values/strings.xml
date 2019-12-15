@@ -2,4 +2,7 @@
     <string name="app_name">TOFinalProject</string>
     <string name="header_AddReviewActivity">Add Review for %1$s</string>
     <string name="title_AddReviewActivity">%1$s</string>
+    <string name="title_HomePageActivity">%1$s</string>
+    <string name="username_HomePageActivity">%1$s</string>
+    <string name="review_HomePageActivity">%1$s</string>
 </resources>

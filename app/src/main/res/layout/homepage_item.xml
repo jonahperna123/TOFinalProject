@@ -4,65 +4,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:id="@+id/layout_HomePageActivity"
-    android:layout_margin="10dp">
+    android:layout_margin="20dp">
 
-    <RelativeLayout
-        android:id="@+id/userLayout_HomePageActivity"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        >
 
-        <TextView
-            android:id="@+id/textViewEmail_HomePageActivity"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageViewAvatar_HomePageActivity"
-            android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
-            android:textColor="#000"
-            android:textSize="20dp"
-            android:text="UserEmail" />
+            android:id="@+id/cardContainer_HomePageActivity"
+            >
+            <RelativeLayout
+                android:id="@+id/cardHeader_HomePageActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp">
 
-        <ImageView
-            android:id="@+id/imageViewAvatar_HomePageActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+                <ImageView
+                    android:id="@+id/imageViewAvatar_HomePageActivity"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@color/colorPrimary" />
 
+                <TextView
+                    android:id="@+id/textViewUsername_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/imageViewAvatar_HomePageActivity"
+                    android:textColor="#000"
+                    android:textSize="28sp"
+                    android:text="@string/username_HomePageActivity"
+                    android:layout_marginLeft="20dp"
+                    android:layout_centerInParent="true"/>
 
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_below="@+id/userLayout_HomePageActivity"
-        android:layout_width="match_parent" android:id="@+id/reviewLayout_HomePageActivity"
-        android:layout_height="match_parent" android:layout_margin="20dp">
+            </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageViewMoviePoster_HomePageActivity"
-            android:layout_width="152dp"
-            android:layout_height="198dp"
-            android:layout_centerHorizontal="true"
-            app:srcCompat="@color/colorPrimary" />
-
-        <RatingBar
-            android:id="@+id/ratingBar_HomePageActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imageViewMoviePoster_HomePageActivity"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:isIndicator="true" />
-
-        <TextView
-            android:id="@+id/textViewReview_HomePageActivity"
-            android:layout_below="@id/ratingBar_HomePageActivity"
-            android:layout_width="wrap_content"
-            android:textSize="18dp"
-            android:textColor="#000"
-            android:layout_alignLeft="@id/ratingBar_HomePageActivity"
-            android:layout_alignRight="@id/ratingBar_HomePageActivity"
-            android:layout_height="wrap_content"
-            android:text="Review" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardBody_HomePageActivity"
+                android:layout_below="@+id/cardHeader_HomePageActivity">
 
 
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#e5e5e5"
+                    android:layout_alignParentTop="true"/>
+
+                <TextView
+                    android:id="@+id/textViewTitleLabel_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Movie Title"
+                    android:textSize="18sp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_centerHorizontal="true"/>
+                <TextView
+                    android:id="@+id/textViewMovieTitle_HomePageActivity"
+                    android:layout_below="@id/textViewTitleLabel_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_HomePageActivity"
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:textColor="#000"
+                    android:layout_marginBottom="30dp"
+                    android:maxEms="10"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/textViewRatingLabel_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rating"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/textViewMovieTitle_HomePageActivity"/>
+
+                <RatingBar
+                    android:id="@+id/ratingBar_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/textViewRatingLabel_HomePageActivity"
+                    android:isIndicator="true" />
+
+                <TextView
+                    android:id="@+id/textViewReviewLabel_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Review"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/ratingBar_HomePageActivity"
+                    android:layout_marginTop="30dp"/>
+
+                <TextView
+                    android:id="@+id/textViewReview_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_HomePageActivity"
+                    android:textColor="#000"
+                    android:layout_below="@id/textViewReviewLabel_HomePageActivity"
+                    android:layout_alignStart="@id/ratingBar_HomePageActivity"
+                    android:layout_alignEnd="@id/ratingBar_HomePageActivity"
+                    android:layout_marginBottom="30dp"
+                    android:textSize="20sp"/>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
