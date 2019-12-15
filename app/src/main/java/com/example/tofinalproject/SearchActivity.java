@@ -27,16 +27,18 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     EditText editTextSearch;
     Button buttonSearch;
+    BottomNavigationView nav;
 
     private RecyclerView recyclerViewSocial;
     private RecyclerViewAdapter adapter;
@@ -70,6 +72,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         editTextSearch = findViewById(R.id.editTextSearch);
         buttonSearch = findViewById(R.id.buttonSearch);
         moviesSearch = new ArrayList<Movie>();
+
+        nav = findViewById(R.id.nav_SearchActivity);
+        // select Search as the checked item
+        nav.setSelectedItemId(R.id.search_BottomNavBar);
+        nav.setOnNavigationItemSelectedListener(this);
 
         buttonSearch.setOnClickListener(this);
 
@@ -120,7 +127,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        String contentSearchText = editTextSearch.getText().toString();
+        // URL encoding for spaces
+        String contentSearchText = editTextSearch.getText().toString().replace(" ", "%20");
 
         RequestQueue requestQueue;
 
@@ -137,7 +145,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         requestQueue.start();
 
         String url2 ="https://api.themoviedb.org/3/search/movie?api_key=4c6eb1a29b65b0358211ff79367ee62f&language=en-US&query=" + contentSearchText + "&page=1&include_adult=false";
-
+//        Toast.makeText(this, url2, Toast.LENGTH_LONG).show();
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url2,
@@ -173,6 +181,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     }
 
                     //for loop loops through the number of results returned, searches by indexOf for "original_title"
+                    int currentLength = moviesSearch.size();
+                    if (currentLength > 0) {
+                        moviesSearch.clear();
+                        adapter.notifyItemRangeRemoved(0, currentLength);
+                    }
                     for (int i = 0; i < index; i++) {
                         Log.d("IN FOR LOOP: ", "in for loop for indexing");
 
@@ -232,4 +245,22 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.home_BottomNavBar:
+                Intent homeIntent = new Intent(this, homePageActivity.class);
+                startActivity(homeIntent);
+                return true;
+            case R.id.search_BottomNavBar:
+                // already in Search
+                return true;
+            case R.id.profile_BottomNavBar:
+                Intent profileIntent = new Intent(this, ViewProfileActivity.class);
+                startActivity(profileIntent);
+                return true;
+            default:
+                return false;
+        }
+    }
 }
