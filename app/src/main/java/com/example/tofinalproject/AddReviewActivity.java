@@ -147,7 +147,8 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
                         Toast.makeText(AddReviewActivity.this, "Failed to add review. " + databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                     else {
-                        Toast.makeText(AddReviewActivity.this, "Added review successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReviewActivity.this, "Added review successfully!", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 }
             });
