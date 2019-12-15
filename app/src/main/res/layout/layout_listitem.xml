@@ -7,16 +7,12 @@
         android:id="@+id/textViewMovieLayoutItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="20sp"
+        android:layout_marginLeft="10dp"
+        android:maxEms="15"
+        android:layout_marginRight="10dp"
         android:textColor="#000"
         android:text="Movie Title" />
-
-    <TextView
-        android:id="@+id/textViewMovieLayoutItemId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewMovieLayoutItemTitle"
-        android:text="Movie ID" />
 
 
 </LinearLayout>

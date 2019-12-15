@@ -40,7 +40,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull viewHolder holder, final int position) {
 
         holder.textViewTitle.setText(movies.get(position).titleMovie);
-        holder.textViewId.setText(movies.get(position).idMovie);
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,14 +66,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class viewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewTitle, textViewId;
+        TextView textViewTitle;
         LinearLayout parentLayout;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.textViewMovieLayoutItemTitle);
-            textViewId = itemView.findViewById(R.id.textViewMovieLayoutItemId);
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
 
