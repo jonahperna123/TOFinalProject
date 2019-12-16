@@ -23,8 +23,8 @@ public class User {
         this.email = email;
         this.followers = new ArrayList<String>();
         this.following = new ArrayList<String>();
-        this.numFollowing = 12;
-        this.numFollowers = 16;
+        this.numFollowing = 0;
+        this.numFollowers = 0;
         this.phoneNumber = new String ();
     }
 }

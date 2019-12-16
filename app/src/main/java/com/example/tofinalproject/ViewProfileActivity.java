@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +28,9 @@ import java.util.ArrayList;
 
 public class ViewProfileActivity extends AppCompatActivity implements View.OnClickListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
-    Button buttonViewTvShows, buttonViewMovies;
+    private FirebaseAuth firebaseAuth;
+
+    Button buttonViewTvShows, buttonViewMovies, buttonLogout;
     TextView textViewFollowers, textViewFollowing;
     BottomNavigationView nav;
 
@@ -40,6 +43,8 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         nav = findViewById(R.id.nav_ViewProfileActivity);
         // select Profile as the checked item
         nav.setSelectedItemId(R.id.profile_BottomNavBar);
@@ -47,12 +52,14 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
         buttonViewTvShows = findViewById(R.id.buttonViewTVShows);
         buttonViewMovies = findViewById(R.id.buttonViewMovies);
+        buttonLogout = findViewById(R.id.buttonLogout);
 
         textViewFollowers = findViewById(R.id.textViewFollowersView);
         textViewFollowing = findViewById(R.id.textViewFollowingView);
 
         buttonViewMovies.setOnClickListener(this);
         buttonViewTvShows.setOnClickListener(this);
+        buttonLogout.setOnClickListener(this);
 
         setTestInformation();
         getUserInformation();
@@ -64,7 +71,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
 
     public void getUserInformation(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user");
+        DatabaseReference myRef = database.getReference("user/testuser");
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -166,6 +173,10 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
             setMovieList();
         } else if (view == buttonViewTvShows) {
             setTvShowList();
+        } else if (view == buttonLogout) {
+            firebaseAuth.signOut();
+            Intent logout = new Intent(this, loginActivity.class);
+            startActivity(logout);
         }
 
     }
@@ -176,7 +187,7 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         //set Movie  test information
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user");
+        DatabaseReference myRef = database.getReference("user/testuser");
 
 
         String firstName = "Test";
