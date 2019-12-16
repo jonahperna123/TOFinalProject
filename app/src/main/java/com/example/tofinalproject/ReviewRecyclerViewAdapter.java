@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecyclerViewAdapter.ReviewViewHolder> {
 
-    public ArrayList<Review> reviewList = new ArrayList<>();
+    public ArrayList<Review> reviewList;
     public Context nContext;
 
     ReviewRecyclerViewAdapter(ArrayList<Review> reviewList, Context nContext) {
@@ -38,12 +38,6 @@ public class ReviewRecyclerViewAdapter extends RecyclerView.Adapter<ReviewRecycl
         holder.contentTitle.setText(review.contentTitle);
         holder.descriptionView.setText(review.review);
         holder.contentRating.setText(String.valueOf(review.starRating) + " / 5");
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(nContext, reviewList.get(position).contentTitle, Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override

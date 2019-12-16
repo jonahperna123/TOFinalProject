@@ -43,22 +43,10 @@ public class ProfileRecyclerViewAdapter extends RecyclerView.Adapter<ProfileRecy
             Movie movie = movieArrayList.get(position);
             holder.contentName.setText(String.valueOf(position + 1) + ". " + movie.titleMovie);
             holder.textViewYearReleased.setText(movie.yearReleased);
-            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(nContext, movieArrayList.get(position).titleMovie, Toast.LENGTH_LONG).show();
-                }
-            });
         } else {
             Episode episode = tvArrayList.get(position);
             holder.contentName.setText(String.valueOf(position + 1) + ". " + episode.seriesTitle + ": " + episode.episodeTitle);
             holder.textViewYearReleased.setText(episode.yearReleased);
-            holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(nContext, tvArrayList.get(position).seriesTitle + ": " + tvArrayList.get(position).episodeTitle, Toast.LENGTH_LONG).show();
-                }
-            });
         }
 
     }
