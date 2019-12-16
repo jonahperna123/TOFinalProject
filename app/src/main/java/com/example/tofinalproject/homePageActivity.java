@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class homePageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -49,22 +51,24 @@ public class homePageActivity extends AppCompatActivity implements BottomNavigat
 
         // TODO: eventually combine this w/ RecyclerView asynchronously
         // getFollowing();
-        reviews = new ArrayList<Review>() {
-            {
-                add(new Review(3, "It was alright", "a@a.com", "movie", "The Joker"));
-                add(new Review(2, "The worst movie I've ever seen", "rtung@gmail.com", "movie", "The Joker"));
-                add(new Review(5, "Good", "a@yahoo.com", "movie", "Avengers: Endgame"));
-            }
-        };
+        reviews = new ArrayList<Review>();
 
         // init RecyclerView stuff
         recyclerView = findViewById(R.id.recyclerView_HomePageActivity);
         mAdapter = new HomeRecyclerViewAdapter(reviews, this);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        getFollowing();
     }
 
     private void getFollowing() {
+        int currSize = reviews.size();
+        if (currSize > 0) {
+            reviews.clear();
+            mAdapter.notifyItemRangeRemoved(0, currSize);
+        }
+
         FirebaseUser currentUser = auth.getCurrentUser();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -75,6 +79,10 @@ public class homePageActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 User user = dataSnapshot.getValue(User.class);
+
+                if (user.following == null) {
+                    return;
+                }
                 getReviews(user.following);
             }
 
@@ -102,7 +110,10 @@ public class homePageActivity extends AppCompatActivity implements BottomNavigat
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     Review review = dataSnapshot.getValue(Review.class);
+
                     reviews.add(review);
+                    mAdapter.notifyDataSetChanged();
+
                 }
 
                 @Override

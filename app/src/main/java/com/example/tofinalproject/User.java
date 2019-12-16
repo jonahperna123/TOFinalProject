@@ -22,7 +22,12 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.followers = new ArrayList<String>();
-        this.following = new ArrayList<String>();
+        // hardcoded so everyone is following "ja@ja.com"
+        this.following = new ArrayList<String>() {
+            {
+                add("ja@ja.com");
+            }
+        };
         this.numFollowing = 0;
         this.numFollowers = 0;
         this.phoneNumber = new String ();
