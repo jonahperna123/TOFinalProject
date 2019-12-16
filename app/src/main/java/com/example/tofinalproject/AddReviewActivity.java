@@ -31,6 +31,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
 
     // TODO: take out, replace with info taken from MovieActivity
     String contentType = "movie";
+    String movie_poster = "";
 
     TextView textViewHeader, textViewTitle;
     ImageView imageViewMoviePoster;
@@ -55,7 +56,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
         Intent intent = getIntent();
 
         String movie_title = intent.getStringExtra("movie_title");
-        String movie_poster = intent.getStringExtra("movie_poster");
+        movie_poster = intent.getStringExtra("movie_poster");
 
         // set title to "Add Review for {{movie title}}"
         textViewHeader = findViewById(R.id.textViewHeader_AddReviewActivity);
@@ -135,7 +136,7 @@ public class AddReviewActivity extends AppCompatActivity implements RatingBar.On
             // create Review object
             float rating = ratingBar.getRating();
             String review = editTextReview.getText().toString();
-            Review r = new Review(rating, review, currentUser.getEmail(), contentType, textViewTitle.getText().toString());
+            Review r = new Review(rating, review, currentUser.getEmail(), contentType, textViewTitle.getText().toString(), movie_poster);
 
             // access the reviews node of database
             FirebaseDatabase database = FirebaseDatabase.getInstance();

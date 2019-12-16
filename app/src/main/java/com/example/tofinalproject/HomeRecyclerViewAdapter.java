@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder> {
@@ -37,6 +39,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Review review = reviews.get(position);
 
+        Picasso.get().load(review.posterURL).into(holder.poster);
         holder.rating.setRating(review.starRating);
         holder.movieTitle.setText(review.contentTitle);
         holder.review.setText(review.review);
@@ -49,7 +52,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView avatar;
+        ImageView avatar, poster;
         TextView username, movieTitle, review;
         RatingBar rating;
 
@@ -57,6 +60,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             super(itemView);
 
             avatar = itemView.findViewById(R.id.imageViewAvatar_HomePageActivity);
+            poster = itemView.findViewById(R.id.imageViewPoster_HomePageActivity);
             username = itemView.findViewById(R.id.textViewUsername_HomePageActivity);
             movieTitle = itemView.findViewById(R.id.textViewMovieTitle_HomePageActivity);
             review = itemView.findViewById(R.id.textViewReview_HomePageActivity);

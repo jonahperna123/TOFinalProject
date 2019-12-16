@@ -58,26 +58,27 @@
                     android:layout_alignParentTop="true"/>
 
                 <TextView
-                    android:id="@+id/textViewTitleLabel_HomePageActivity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Movie Title"
-                    android:textSize="18sp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_centerHorizontal="true"/>
-                <TextView
                     android:id="@+id/textViewMovieTitle_HomePageActivity"
-                    android:layout_below="@id/textViewTitleLabel_HomePageActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_HomePageActivity"
+                    android:layout_marginTop="25dp"
                     android:layout_centerHorizontal="true"
                     android:textAlignment="center"
                     android:textColor="#000"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="4dp"
                     android:maxEms="10"
                     android:textSize="30sp"/>
+
+                <ImageView
+                    android:id="@+id/imageViewPoster_HomePageActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@color/colorPrimary"
+                    tools:srcCompat="@tools:sample/avatars"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="30dp"
+                    android:layout_below="@id/textViewMovieTitle_HomePageActivity"/>
 
                 <TextView
                     android:id="@+id/textViewRatingLabel_HomePageActivity"
@@ -87,7 +88,7 @@
                     android:textSize="18sp"
                     android:layout_marginBottom="4dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_below="@id/textViewMovieTitle_HomePageActivity"/>
+                    android:layout_below="@id/imageViewPoster_HomePageActivity"/>
 
                 <RatingBar
                     android:id="@+id/ratingBar_HomePageActivity"

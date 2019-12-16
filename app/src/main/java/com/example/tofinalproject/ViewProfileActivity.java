@@ -1,6 +1,7 @@
 package com.example.tofinalproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,43 +69,49 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         initRecyclerView();
 
 
-
     }
 
     public void getUserInformation(){
+        // use currentUser's email as identifier
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("user/testuser");
+        DatabaseReference userRef = database.getReference("user");
 
         // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        userRef.orderByChild("email").equalTo(currentUser.getEmail()).limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                User value = dataSnapshot.getValue(User.class);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                User user = dataSnapshot.getValue(User.class);
+                textViewFollowers.setText(String.valueOf(user.followers == null ? 0 : user.followers.size()));
+                textViewFollowing.setText(String.valueOf(user.following == null ? 0 : user.following.size()));
+            }
 
-                textViewFollowers.setText(String.valueOf(value.numFollowers));
-                textViewFollowing.setText(String.valueOf(value.numFollowing));
-
-
-                //DO THIS - grab values from realtime database
-//                tvShowsRated =  new ArrayList<>();
-//                moviesRated =  new ArrayList<>();
-
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
         final ArrayList<Review> firebaseReviews = new ArrayList<>();
 
-        myRef = database.getReference("reviews");
-        myRef.orderByChild("userEmail").equalTo("ja@ja.com").addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference reviewRef = database.getReference("reviews");
+        reviewRef.orderByChild("userEmail").equalTo(currentUser.getEmail()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -240,12 +249,6 @@ public class ViewProfileActivity extends AppCompatActivity implements View.OnCli
         this.moviesRated.add(movie8);
         this.moviesRated.add(movie9);
         this.moviesRated.add(movie10);
-
-        User userOne = new User(email, firstName, lastName);
-
-
-        myRef.setValue(userOne);
-
 
         //set test Episode information
          String seriesTitle = "Psych";
